@@ -1,7 +1,12 @@
+import { UserProvider } from "./contexts/userContext";
+import { GlobalStyle } from "./styles/global";
+import { AppRouter } from "./routes";
+
 export function App() {
   return (
-    <div>
-      <h1>EZ Wallet</h1>
-    </div>
+    <UserProvider>
+      <GlobalStyle />
+      <AppRouter />
+    </UserProvider>
   );
 }
