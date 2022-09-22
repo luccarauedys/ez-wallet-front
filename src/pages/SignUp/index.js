@@ -3,8 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer } from "react-toastify";
 import { Container, FormContainer } from "./styles.js";
+import { api } from "../../services/api.js";
+import { notifyError } from "../../utils/toasts.js";
 
 const schema = yup
   .object({
@@ -24,6 +27,8 @@ const schema = yup
 export function SignUp() {
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -33,15 +38,16 @@ export function SignUp() {
   });
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     delete data.confirmPassword;
-    console.log(data);
-
-    // try {
-    //   enviar dados pra api
-    //   navigate("/");
-    // } catch (error) {
-    //   if (error.response.data) notifyError(error.response.data);
-    // }
+    try {
+      await api.post("/auth/sign-up", data);
+      setIsLoading(false);
+      navigate("/");
+    } catch (error) {
+      setIsLoading(false);
+      if (error.response.data) notifyError(error.response.data);
+    }
   };
 
   React.useEffect(() => {
@@ -54,6 +60,7 @@ export function SignUp() {
       <div>
         <img src="/1f4c8.svg" alt="Logo" />
         <h1>Crie uma conta e gerencie agora suas finanças!</h1>
+
         <FormContainer onSubmit={handleSubmit(onSubmit)}>
           <label>
             Nome:
@@ -75,7 +82,24 @@ export function SignUp() {
             <input type="password" {...register("confirmPassword", { required: true })} />
             <p className="error">{errors.confirmPassword?.message}</p>
           </label>
-          <button>Criar conta</button>
+
+          {isLoading ? (
+            <button disabled>
+              <ThreeDots
+                height={20}
+                width={50}
+                radius="9"
+                color="#ffffff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+            </button>
+          ) : (
+            <button>Criar conta</button>
+          )}
+
           <Link to="/">Já possui uma conta? Faça login!</Link>
         </FormContainer>
       </div>

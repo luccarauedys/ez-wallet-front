@@ -70,6 +70,9 @@ export const FormContainer = styled.form`
   }
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0.6rem;
     margin: 1rem 0;
     border-radius: 0.4rem;
@@ -80,6 +83,11 @@ export const FormContainer = styled.form`
 
     :hover {
       background-color: ${colors.greenLight};
+    }
+
+    :disabled {
+      background-color: ${colors.gray2};
+      cursor: not-allowed;
     }
   }
 
