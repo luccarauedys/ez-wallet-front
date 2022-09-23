@@ -1,12 +1,12 @@
-import { UserProvider } from "./contexts/userContext";
+import { TransactionsProvider } from "./contexts/transactionsContext";
 import { GlobalStyle } from "./styles/global";
 import { AppRouter } from "./routes";
 
 export function App() {
   return (
-    <UserProvider>
+    <TransactionsProvider>
       <GlobalStyle />
       <AppRouter />
-    </UserProvider>
+    </TransactionsProvider>
   );
 }

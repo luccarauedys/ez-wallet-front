@@ -14,6 +14,7 @@ export function AppRouter() {
         <Route path="/home" element={<DefaultLayout />}>
           <Route index element={<Home />} />
         </Route>
+        <Route path="*" element={<SignIn />} />
       </Routes>
     </BrowserRouter>
   );

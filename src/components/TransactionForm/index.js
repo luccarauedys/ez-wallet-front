@@ -2,12 +2,16 @@ import React from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer } from "react-toastify";
 import { Button, Container, Field1, Field2, Field3, Field4 } from "./styles";
+import { useTransactionsContext } from "../../contexts/transactionsContext";
 import { api, getConfig } from "../../services/api";
 import { notifyError } from "../../utils/toasts";
 import { formatDate } from "../../utils/formatters";
 
 export function TransactionForm() {
+  const { getTransactions } = useTransactionsContext();
+
   const [isLoading, setIsLoading] = React.useState(false);
+
   const [transaction, setTransaction] = React.useState({
     description: "",
     value: "",
@@ -18,29 +22,20 @@ export function TransactionForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !transaction.description ||
-      !transaction.value ||
-      !transaction.type ||
-      !transaction.date
-    ) {
-      return notifyError("Preencha todos os campos!");
-    }
-
     setIsLoading(true);
-
     const date = formatDate(transaction.date);
     const transactionData = { ...transaction, date };
 
     try {
       await api.post("/transactions", transactionData, getConfig());
+      await getTransactions();
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       if (error.response.data) notifyError(error.response.data);
     }
 
-    setTransaction({ description: "", value: "", type: "", date: "" });
+    setTransaction({ description: "", value: "", type: "Selecione", date: "" });
   };
 
   return (
@@ -56,6 +51,7 @@ export function TransactionForm() {
             onChange={(e) =>
               setTransaction({ ...transaction, description: e.target.value })
             }
+            required
           />
         </Field1>
 
@@ -66,6 +62,7 @@ export function TransactionForm() {
             type="number"
             value={transaction.value}
             onChange={(e) => setTransaction({ ...transaction, value: e.target.value })}
+            required
           />
         </Field2>
 
@@ -74,7 +71,11 @@ export function TransactionForm() {
           <select
             id="type"
             onChange={(e) => setTransaction({ ...transaction, type: e.target.value })}
+            required
           >
+            <option value="" defaultChecked>
+              Selecione...
+            </option>
             <option value="deposit">Entrada</option>
             <option value="withdraw">Saída</option>
           </select>
@@ -87,6 +88,7 @@ export function TransactionForm() {
             type="date"
             value={transaction.date}
             onChange={(e) => setTransaction({ ...transaction, date: e.target.value })}
+            required
           />
         </Field4>
 

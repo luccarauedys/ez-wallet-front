@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Grid } from "react-loader-spinner";
 import { Container, Content, FormContainer, TransactionsContainer } from "./styles";
 import { TransactionForm } from "../../components/TransactionForm";
-import { useUserContext } from "../../contexts/userContext";
+import { useTransactionsContext } from "../../contexts/transactionsContext";
 import { TransactionsList } from "../../components/TransactionsList";
 
 export function Home() {
   const navigate = useNavigate();
 
-  const { isLoading } = useUserContext();
+  const { isLoading } = useTransactionsContext();
 
   const centerDivStyle = {
     marginTop: "80px",
