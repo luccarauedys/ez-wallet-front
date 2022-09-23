@@ -18,21 +18,20 @@ export function SummaryCard({ title, value, children }) {
         <h3>{title}</h3>
         {children}
       </Title>
-      <p>
-        {isLoading ? (
-          <TailSpin
-            height="25"
-            width="25"
-            radius="1"
-            color="#FFFFFF"
-            wrapperStyle={spinnerWrapperStyle}
-            visible={true}
-            ariaLabel="tail-spin-loading"
-          />
-        ) : (
-          value
-        )}
-      </p>
+
+      {isLoading ? (
+        <TailSpin
+          height="25"
+          width="25"
+          radius="1"
+          color="#FFFFFF"
+          wrapperStyle={spinnerWrapperStyle}
+          visible={true}
+          ariaLabel="tail-spin-loading"
+        />
+      ) : (
+        <p>{value}</p>
+      )}
     </Container>
   );
 }

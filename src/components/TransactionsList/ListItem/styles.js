@@ -40,7 +40,7 @@ export const RightSide = styled.div`
   gap: 1rem;
 
   p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
   }
 

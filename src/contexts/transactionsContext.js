@@ -1,13 +1,13 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import React from "react";
 import { ToastContainer } from "react-toastify";
 import { api, getConfig } from "../services/api";
 import { notifyError } from "../utils/toasts";
 
-export const TransactionsContext = createContext({});
+export const TransactionsContext = React.createContext({});
 
 export function TransactionsProvider({ children }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [transactions, setTransactions] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [transactions, setTransactions] = React.useState([]);
 
   const getTransactions = async () => {
     setIsLoading(true);
@@ -33,13 +33,6 @@ export function TransactionsProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token@ezwallet");
-    if (token) {
-      getTransactions();
-    }
-  }, []);
-
   return (
     <TransactionsContext.Provider
       value={{
@@ -58,6 +51,6 @@ export function TransactionsProvider({ children }) {
 
 export function useTransactionsContext() {
   const { transactions, setTransactions, getTransactions, deleteTransaction, isLoading } =
-    useContext(TransactionsContext);
+    React.useContext(TransactionsContext);
   return { transactions, setTransactions, getTransactions, deleteTransaction, isLoading };
 }

@@ -9,7 +9,7 @@ import { TransactionsList } from "../../components/TransactionsList";
 export function Home() {
   const navigate = useNavigate();
 
-  const { isLoading } = useTransactionsContext();
+  const { getTransactions, isLoading } = useTransactionsContext();
 
   const centerDivStyle = {
     marginTop: "80px",
@@ -20,8 +20,9 @@ export function Home() {
 
   React.useEffect(() => {
     const token = localStorage.getItem("token@ezwallet");
-    if (!token) navigate("/");
-  }, [navigate]);
+    if (!token) return navigate("/");
+    getTransactions();
+  }, []);
 
   return (
     <Container>

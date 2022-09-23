@@ -1,6 +1,7 @@
 import { TrashSimple } from "phosphor-react";
 import { useTransactionsContext } from "../../../contexts/transactionsContext";
 import { Container, LeftSide, RightSide } from "./styles";
+import { formatPrice } from "../../../utils/formatters";
 
 export function ListItem({ transaction }) {
   const { deleteTransaction } = useTransactionsContext();
@@ -20,7 +21,7 @@ export function ListItem({ transaction }) {
       </LeftSide>
 
       <RightSide>
-        <p>R$ {transaction.value}</p>
+        <p>{formatPrice(transaction.value)}</p>
         <TrashSimple size={22} weight="fill" color="#f75a68" onClick={handleDelete} />
       </RightSide>
     </Container>
