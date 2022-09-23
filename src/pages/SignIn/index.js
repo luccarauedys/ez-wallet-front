@@ -49,44 +49,46 @@ export function SignIn() {
   }, [navigate]);
 
   return (
-    <Container>
-      <div>
-        <img src="/1f4c8.svg" alt="Logo" />
-        <h1>Faça login e gerencie agora suas finanças!</h1>
+    <>
+      <Container>
+        <div>
+          <img src="/1f4c8.svg" alt="Logo" />
+          <h1>Faça login e gerencie agora suas finanças!</h1>
 
-        <FormContainer onSubmit={handleSubmit(onSubmit)}>
-          <label>
-            Email:
-            <input type="text" {...register("email", { required: true })} />
-            <p className="error">{errors.email?.message}</p>
-          </label>
-          <label>
-            Senha:
-            <input type="password" {...register("password", { required: true })} />
-            <p className="error">{errors.password?.message}</p>
-          </label>
+          <FormContainer onSubmit={handleSubmit(onSubmit)}>
+            <label>
+              Email:
+              <input type="text" {...register("email", { required: true })} />
+              <p className="error">{errors.email?.message}</p>
+            </label>
+            <label>
+              Senha:
+              <input type="password" {...register("password", { required: true })} />
+              <p className="error">{errors.password?.message}</p>
+            </label>
 
-          {isLoading ? (
-            <button disabled>
-              <ThreeDots
-                height={20}
-                width={50}
-                radius="9"
-                color="#ffffff"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                wrapperClassName=""
-                visible={true}
-              />
-            </button>
-          ) : (
-            <button>Entrar na conta</button>
-          )}
+            {isLoading ? (
+              <button disabled>
+                <ThreeDots
+                  height={20}
+                  width={50}
+                  radius="9"
+                  color="#ffffff"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </button>
+            ) : (
+              <button>Entrar na conta</button>
+            )}
 
-          <Link to="/signup">Não possui uma conta? Faça o cadastro!</Link>
-        </FormContainer>
-      </div>
+            <Link to="/signup">Não possui uma conta? Faça o cadastro!</Link>
+          </FormContainer>
+        </div>
+      </Container>
       <ToastContainer />
-    </Container>
+    </>
   );
 }

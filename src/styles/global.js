@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { colors } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -15,6 +16,11 @@ export const GlobalStyle = createGlobalStyle`
   html, body, #root {
     width: 100%;
     height: 100%;
+  }
+
+  body {
+    background-color: ${colors.gray5};
+    color: ${colors.white};
   }
 
   button, svg {

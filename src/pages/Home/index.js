@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Container, Content, FormContainer, TransactionsContainer } from "./styles";
+import { TransactionForm } from "../../components/TransactionForm";
 
 export function Home() {
   const navigate = useNavigate();
@@ -10,8 +12,14 @@ export function Home() {
   }, [navigate]);
 
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <Container>
+      <Content>
+        <FormContainer>
+          <TransactionForm />
+        </FormContainer>
+
+        <TransactionsContainer>{/* <TransactionsList /> */}</TransactionsContainer>
+      </Content>
+    </Container>
   );
 }

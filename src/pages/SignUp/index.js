@@ -56,54 +56,59 @@ export function SignUp() {
   }, [navigate]);
 
   return (
-    <Container>
-      <div>
-        <img src="/1f4c8.svg" alt="Logo" />
-        <h1>Crie uma conta e gerencie agora suas finanças!</h1>
+    <>
+      <Container>
+        <div>
+          <img src="/1f4c8.svg" alt="Logo" />
+          <h1>Crie uma conta e gerencie agora suas finanças!</h1>
 
-        <FormContainer onSubmit={handleSubmit(onSubmit)}>
-          <label>
-            Nome:
-            <input type="text" {...register("name", { required: true })} />
-            <p className="error">{errors.name?.message}</p>
-          </label>
-          <label>
-            Email:
-            <input type="text" {...register("email", { required: true })} />
-            <p className="error">{errors.email?.message}</p>
-          </label>
-          <label>
-            Senha:
-            <input type="password" {...register("password", { required: true })} />
-            <p className="error">{errors.password?.message}</p>
-          </label>
-          <label>
-            Confirme a senha:
-            <input type="password" {...register("confirmPassword", { required: true })} />
-            <p className="error">{errors.confirmPassword?.message}</p>
-          </label>
-
-          {isLoading ? (
-            <button disabled>
-              <ThreeDots
-                height={20}
-                width={50}
-                radius="9"
-                color="#ffffff"
-                ariaLabel="three-dots-loading"
-                wrapperStyle={{}}
-                wrapperClassName=""
-                visible={true}
+          <FormContainer onSubmit={handleSubmit(onSubmit)}>
+            <label>
+              Nome:
+              <input type="text" {...register("name", { required: true })} />
+              <p className="error">{errors.name?.message}</p>
+            </label>
+            <label>
+              Email:
+              <input type="text" {...register("email", { required: true })} />
+              <p className="error">{errors.email?.message}</p>
+            </label>
+            <label>
+              Senha:
+              <input type="password" {...register("password", { required: true })} />
+              <p className="error">{errors.password?.message}</p>
+            </label>
+            <label>
+              Confirme a senha:
+              <input
+                type="password"
+                {...register("confirmPassword", { required: true })}
               />
-            </button>
-          ) : (
-            <button>Criar conta</button>
-          )}
+              <p className="error">{errors.confirmPassword?.message}</p>
+            </label>
 
-          <Link to="/">Já possui uma conta? Faça login!</Link>
-        </FormContainer>
-      </div>
+            {isLoading ? (
+              <button disabled>
+                <ThreeDots
+                  height={20}
+                  width={50}
+                  radius="9"
+                  color="#ffffff"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </button>
+            ) : (
+              <button>Criar conta</button>
+            )}
+
+            <Link to="/">Já possui uma conta? Faça login!</Link>
+          </FormContainer>
+        </div>
+      </Container>
       <ToastContainer />
-    </Container>
+    </>
   );
 }
