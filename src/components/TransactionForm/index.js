@@ -2,7 +2,7 @@ import React from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer } from "react-toastify";
 import { Button, Container, Field1, Field2, Field3, Field4 } from "./styles";
-import { api, configHeaders } from "../../services/api";
+import { api, getConfig } from "../../services/api";
 import { notifyError } from "../../utils/toasts";
 import { formatDate } from "../../utils/formatters";
 
@@ -33,7 +33,7 @@ export function TransactionForm() {
     const transactionData = { ...transaction, date };
 
     try {
-      await api.post("/transactions", transactionData, configHeaders());
+      await api.post("/transactions", transactionData, getConfig());
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
