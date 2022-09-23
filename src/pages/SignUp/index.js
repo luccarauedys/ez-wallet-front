@@ -42,11 +42,11 @@ export function SignUp() {
     delete data.confirmPassword;
     try {
       await api.post("/auth/sign-up", data);
-      setIsLoading(false);
       navigate("/");
     } catch (error) {
-      setIsLoading(false);
       if (error.response.data) notifyError(error.response.data);
+    } finally {
+      setIsLoading(false);
     }
   };
 
