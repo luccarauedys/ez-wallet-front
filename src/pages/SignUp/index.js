@@ -51,8 +51,8 @@ export function SignUp() {
   };
 
   React.useEffect(() => {
-    const uid = localStorage.getItem("@ezwallet@uid");
-    if (uid) navigate("/home");
+    const token = localStorage.getItem("token@ezwallet");
+    if (token) navigate("/home");
   }, [navigate]);
 
   return (
