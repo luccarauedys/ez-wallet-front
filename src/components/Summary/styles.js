@@ -17,7 +17,9 @@ export const Container = styled.div`
   z-index: 2;
 
   div:last-child {
-    background-color: ${colors.greenLight};
+    background-color: ${(props) =>
+      props.balance && props.balance < 0 ? colors.red : colors.greenLight};
+
     color: ${colors.white};
 
     h3 {

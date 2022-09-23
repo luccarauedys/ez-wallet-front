@@ -1,4 +1,4 @@
-import { TailSpin } from "react-loader-spinner";
+import { ThreeDots } from "react-loader-spinner";
 import { useTransactionsContext } from "../../contexts/transactionsContext";
 import { Container, Title } from "./styles";
 
@@ -20,17 +20,20 @@ export function SummaryCard({ title, value, children }) {
       </Title>
 
       {isLoading ? (
-        <TailSpin
+        <ThreeDots
           height="25"
           width="25"
-          radius="1"
           color="#FFFFFF"
+          ariaLabel="grid-loading"
+          radius="12.5"
           wrapperStyle={spinnerWrapperStyle}
           visible={true}
-          ariaLabel="tail-spin-loading"
         />
       ) : (
-        <p>{value}</p>
+        <p>
+          {title === "Saídas" && "-"}
+          {value}
+        </p>
       )}
     </Container>
   );

@@ -19,7 +19,7 @@ export function Summary() {
   const balance = deposits - withdraws;
 
   return (
-    <Container>
+    <Container balance={balance}>
       <SummaryCard title="Entradas" value={formatPrice(deposits)}>
         <ArrowCircleUp size={30} color="#00b37e" />
       </SummaryCard>

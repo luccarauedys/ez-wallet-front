@@ -1,6 +1,6 @@
 import React from "react";
 import { useTransactionsContext } from "../../contexts/transactionsContext";
-import { Container, Header, List } from "./styles";
+import { Container, Header, List, SearchField } from "./styles";
 import { ListItem } from "./ListItem";
 
 export function TransactionsList() {
@@ -8,6 +8,7 @@ export function TransactionsList() {
 
   const [transactions, setTransactions] = React.useState(allTransactions);
   const [activeButton, setActiveButton] = React.useState("Tudo");
+  const [searchFilter, setSearchFilter] = React.useState("");
 
   const activeButtonStyle = { backgroundColor: "#015f43" };
 
@@ -30,6 +31,24 @@ export function TransactionsList() {
     );
     setTransactions(withdraws);
     setActiveButton("Saídas");
+  };
+
+  const handleSearch = () => {
+    if (searchFilter === "") {
+      return handleClearSearchFilter();
+    }
+
+    const regex = new RegExp(searchFilter, "i");
+    const filtered = transactions.filter((transaction) =>
+      regex.test(transaction.description)
+    );
+
+    setTransactions(filtered);
+  };
+
+  const handleClearSearchFilter = () => {
+    setSearchFilter("");
+    getAll();
   };
 
   return (
@@ -57,6 +76,17 @@ export function TransactionsList() {
           </button>
         </div>
       </Header>
+
+      <SearchField>
+        <input
+          type="text"
+          placeholder="Descrição da transação"
+          value={searchFilter}
+          onChange={(e) => setSearchFilter(e.target.value)}
+        />
+        <button onClick={handleSearch}>Buscar</button>
+        <button onClick={handleClearSearchFilter}>Limpar filtros</button>
+      </SearchField>
 
       <List>
         {transactions.map((transaction) => (
